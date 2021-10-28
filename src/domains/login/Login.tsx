@@ -1,19 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-function Login() {
+const Login = ({
+  onClick,
+}: any) => {
+  const [userId, setUserId] = useState('');
+  const [password, setPassword] = useState('');
+
+  function handleChangeUserId(event: React.ChangeEvent<HTMLInputElement>) {
+    const { target: { value } } = event;
+    setUserId(value);
+  }
+
+  function handleChangePassword(event: React.ChangeEvent<HTMLInputElement>) {
+    const { target: { value } } = event;
+    setPassword(value);
+  }
+
+  function handleClick() {
+    onClick({ userId, password });
+  }
+
   return (
     <section>
       <div>
-        <label htmlFor="login-email">
+        <label htmlFor="login-userId">
           아이디
         </label>
         <input
-          type="email"
-          id="login-email"
-          name="email"
-          value=""
-          placeholder="email"
-          onChange={() => null}
+          type="userId"
+          id="login-userId"
+          name="userId"
+          value={userId}
+          placeholder="아이디"
+          onChange={handleChangeUserId}
         />
       </div>
       <div>
@@ -24,19 +43,19 @@ function Login() {
           type="password"
           id="login-password"
           name="password"
-          value=""
-          placeholder="password"
-          onChange={() => null}
+          value={password}
+          placeholder="비밀번호"
+          onChange={handleChangePassword}
         />
       </div>
       <button
         type="button"
-        onClick={() => null}
+        onClick={handleClick}
       >
         로그인
       </button>
     </section>
   );
-}
+};
 
 export default Login;
