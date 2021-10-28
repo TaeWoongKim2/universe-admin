@@ -21,7 +21,7 @@ const Login = ({
   }
 
   return (
-    <section>
+    <>
       <div>
         <label htmlFor="login-userId">
           아이디
@@ -54,7 +54,7 @@ const Login = ({
       >
         로그인
       </button>
-    </section>
+    </>
   );
 };
 

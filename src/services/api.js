@@ -22,8 +22,8 @@ export async function postLogin({
   const response = await fetch(url, {
     method: 'POST',
     headers: {
-      'Content-Type': APPLICATION_JSON_UTF8,
-      accept: APPLICATION_JSON_UTF8,
+      'Content-Type': APPLICATION_JSON_UTF8(),
+      accept: APPLICATION_JSON_UTF8(),
     },
     body: JSON.stringify({
       userId,
@@ -31,17 +31,19 @@ export async function postLogin({
       fcmToken,
     }),
   });
-  const responseObject = await response.json();
-  const { roles } = responseObject;
-  console.log(response, responseObject);
-
-  if (roles.includes('ROLE_ADMIN')) {
+  if (!response.ok) {
     alert('아이디 및 패스워드를 확인해주세요!');
-    return responseObject;
+    return null;
   }
 
-  alert('아이디 및 패스워드를 확인해주세요!');
-  return {};
+  const body = await response.json();
+  const { roles } = body;
+  if (!roles.includes('ROLE_ADMIN')) {
+    alert('관리자 권한이 없는 계정입니다!');
+    return null;
+  }
+
+  return body;
 }
 
 // TODO: make something new!!!

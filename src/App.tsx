@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 
 import AdminMenu from './domains/administrator/AdminMenu';
-import Login from './domains/login/Login';
+import LoginContainer from './domains/login/LoginContainer';
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
       <section>
         <Switch>
           <Route exact path="/" component={AdminMenu} />
-          <Route path="/login" component={Login} />
+          <Route path="/login" component={LoginContainer} />
           {/* <Route path="/about" component={AboutPage} /> */}
         </Switch>
       </section>
