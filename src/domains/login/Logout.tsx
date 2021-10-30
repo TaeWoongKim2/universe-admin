@@ -18,9 +18,9 @@ const Logout = ({
   });
 
   return (
-    <>
+    <section>
       로그아웃 진행중입니다...
-    </>
+    </section>
   );
 };
 
