@@ -1,10 +1,20 @@
 import React from 'react';
 
+import styled from 'styled-components';
+
 import Login from './Login';
 
 import { postLogin } from '../../services/api';
 import { saveItem } from '../../services/storage';
 import { AuthenticationKey } from '../../services/serviceKey';
+
+const LoginSection = styled.section`
+  height: 100vh;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+`;
 
 type AdminUser = {
   userId: string;
@@ -21,9 +31,9 @@ function LoginContainer({
   };
 
   return (
-    <article>
+    <LoginSection>
       <Login onClick={login} />
-    </article>
+    </LoginSection>
   );
 }
 
