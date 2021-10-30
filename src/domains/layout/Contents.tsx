@@ -6,7 +6,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 
-import AdminMenu from '../administrator/AdminMenu';
+import AdminSystem from '../administrator/AdminSystem';
 import LoginContainer from '../login/LoginContainer';
 import Logout from '../login/Logout';
 
@@ -34,7 +34,7 @@ function Contents({
         </Route>
         <Route exact path="/">
           {authenticated
-            ? <AdminMenu />
+            ? <AdminSystem />
             : <Redirect to="/login" />}
         </Route>
       </Switch>

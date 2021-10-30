@@ -21,9 +21,9 @@ function LoginContainer({
   };
 
   return (
-    <section>
+    <article>
       <Login onClick={login} />
-    </section>
+    </article>
   );
 }
 
