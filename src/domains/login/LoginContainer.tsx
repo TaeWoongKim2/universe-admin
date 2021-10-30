@@ -18,7 +18,6 @@ function LoginContainer({
     const authentication = await postLogin(adminUser);
     saveItem(AuthenticationKey, authentication);
     setAuthentication(authentication);
-    console.log('[LOGIN SUCCESS]', authentication);
   };
 
   return (
