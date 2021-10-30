@@ -19,6 +19,19 @@ function Contents({
   authenticated,
   onAuth,
 }: Auth) {
+  const authenticatedContents = [
+    {
+      name: 'logout',
+      href: '/logout',
+      component: <Logout removeAuthentication={onAuth} />,
+    },
+    {
+      name: 'main',
+      href: '/',
+      component: <AdminSystem />,
+    },
+  ];
+
   return (
     <section>
       <Switch>
@@ -27,16 +40,17 @@ function Contents({
             ? <Redirect to="/" />
             : <LoginContainer setAuthentication={onAuth} />}
         </Route>
-        <Route exact path="/logout">
-          {authenticated
-            ? <Logout removeAuthentication={onAuth} />
-            : <Redirect to="/login" />}
-        </Route>
-        <Route exact path="/">
-          {authenticated
-            ? <AdminSystem />
-            : <Redirect to="/login" />}
-        </Route>
+        {authenticatedContents.map((content) => (
+          <Route
+            key={content.name}
+            path={content.href}
+            exact
+          >
+            {authenticated
+              ? content.component
+              : <Redirect to="/login" />}
+          </Route>
+        ))}
       </Switch>
     </section>
   );
