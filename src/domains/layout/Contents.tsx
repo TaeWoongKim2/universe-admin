@@ -33,26 +33,24 @@ function Contents({
   ];
 
   return (
-    <section>
-      <Switch>
-        <Route exact path="/login">
+    <Switch>
+      <Route exact path="/login">
+        {authenticated
+          ? <Redirect to="/" />
+          : <LoginContainer setAuthentication={onAuth} />}
+      </Route>
+      {authenticatedContents.map((content) => (
+        <Route
+          key={content.name}
+          path={content.href}
+          exact
+        >
           {authenticated
-            ? <Redirect to="/" />
-            : <LoginContainer setAuthentication={onAuth} />}
+            ? content.component
+            : <Redirect to="/login" />}
         </Route>
-        {authenticatedContents.map((content) => (
-          <Route
-            key={content.name}
-            path={content.href}
-            exact
-          >
-            {authenticated
-              ? content.component
-              : <Redirect to="/login" />}
-          </Route>
-        ))}
-      </Switch>
-    </section>
+      ))}
+    </Switch>
   );
 }
 
