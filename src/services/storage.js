@@ -15,3 +15,11 @@ export function saveItem(key, value) {
 export function loadItem(key) {
   return localStorage.getItem(key);
 }
+
+/**
+ * 브라우저 로컬 스토리지에 저장된 데이터 삭제
+ * @param {*} key 호출할 데이터의 키값
+ */
+export function removeItem(key) {
+  localStorage.removeItem(key);
+}
