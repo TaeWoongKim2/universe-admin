@@ -18,8 +18,6 @@ const loginForm = [
 ];
 
 function Login({ onClick }: any) {
-  // const [userId, setUserId] = useState('');
-  // const [password, setPassword] = useState('');
   const [form, setForm] = useState({
     userId: '',
     password: '',
@@ -42,18 +40,25 @@ function Login({ onClick }: any) {
       {loginForm.map((input) => (
         <Box
           key={input.id}
+          sx={{
+            marginTop: '8px',
+            marginBottom: '16px',
+          }}
         >
           <TextField
             id={input.id}
             name={input.name}
             label={input.label}
             onChange={handleChange}
+            size="small"
+            fullWidth
           />
         </Box>
       ))}
       <Button
         variant="contained"
         onClick={handleClick}
+        fullWidth
       >
         로그인
       </Button>
