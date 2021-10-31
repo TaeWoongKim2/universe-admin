@@ -26,7 +26,7 @@ function LoginContainer({
 }: any) {
   const login = async (adminUser: AdminUser) => {
     const authentication = await postLogin(adminUser);
-    saveItem(AuthenticationKey, authentication);
+    saveItem(AuthenticationKey, JSON.stringify(authentication));
     setAuthentication(authentication);
   };
 

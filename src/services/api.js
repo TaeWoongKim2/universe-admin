@@ -46,7 +46,26 @@ export async function postLogin({
   return body;
 }
 
-// TODO: make something new!!!
-export async function toDo() {
-  return null;
+/**
+ * 모든 서비스 사용자 목록을 불러옵니다.
+ * @param password
+ * @param fcmToken
+ * @returns 인증 토큰
+ * http 3.34.191.212:9090/api/user 'Authorization:Bearer {token}'
+ */
+export async function getUsers({
+  type = 'Bearer',
+  token,
+}) {
+  const response = await fetch(`${SERVICE_DOMAIN()}/api/user`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': APPLICATION_JSON_UTF8(),
+      accept: APPLICATION_JSON_UTF8(),
+      Authorization: `${type} ${token}`,
+    },
+  });
+
+  const body = await response.json();
+  return body;
 }
