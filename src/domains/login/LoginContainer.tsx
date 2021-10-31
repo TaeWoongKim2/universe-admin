@@ -8,7 +8,7 @@ import { postLogin } from '../../services/api';
 import { saveItem } from '../../services/storage';
 import { AuthenticationKey } from '../../services/serviceKey';
 
-const LoginSection = styled.section`
+const LoginSection = styled.main`
   height: 100vh;
   display: flex;
   flex-flow: column nowrap;
@@ -26,8 +26,10 @@ function LoginContainer({
 }: any) {
   const login = async (adminUser: AdminUser) => {
     const authentication = await postLogin(adminUser);
-    saveItem(AuthenticationKey, JSON.stringify(authentication));
-    setAuthentication(authentication);
+    if (authentication) {
+      saveItem(AuthenticationKey, JSON.stringify(authentication));
+      setAuthentication(authentication);
+    }
   };
 
   return (

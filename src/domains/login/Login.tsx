@@ -2,73 +2,61 @@ import React, { useState } from 'react';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
-// const loginForm = [
-//   {
-//     label: '아이디',
-//     name: 'userId',
-//   },
-// ];
+const loginForm = [
+  {
+    id: 'userId',
+    name: 'userId',
+    label: '아이디',
+  },
+  {
+    id: 'password',
+    name: 'password',
+    label: '비밀번호',
+  },
+];
 
 function Login({ onClick }: any) {
-  const [userId, setUserId] = useState('');
-  const [password, setPassword] = useState('');
+  // const [userId, setUserId] = useState('');
+  // const [password, setPassword] = useState('');
+  const [form, setForm] = useState({
+    userId: '',
+    password: '',
+  });
 
-  function handleChangeUserId(event: React.ChangeEvent<HTMLInputElement>) {
-    const { target: { value } } = event;
-    setUserId(value);
-  }
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { target: { name, value } } = event;
+    setForm({
+      ...form,
+      [name]: value,
+    });
+  };
 
-  function handleChangePassword(event: React.ChangeEvent<HTMLInputElement>) {
-    const { target: { value } } = event;
-    setPassword(value);
-  }
-
-  function handleClick() {
-    onClick({ userId, password });
-  }
+  const handleClick = () => {
+    onClick({ ...form });
+  };
 
   return (
     <>
-      <Box>
-        <TextField
-          label="아이디"
-          id="userId"
-          name="userId"
-          value={userId}
-          onChange={() => handleChangeUserId}
-        />
-        {/* <label htmlFor="login-userId">
-          아이디
-        </label>
-        <input
-          type="userId"
-          id="login-userId"
-          name="userId"
-          value={userId}
-          placeholder="아이디"
-          onChange={handleChangeUserId}
-        /> */}
-      </Box>
-      <div>
-        <label htmlFor="login-password">
-          비밀번호
-        </label>
-        <input
-          type="password"
-          id="login-password"
-          name="password"
-          value={password}
-          placeholder="비밀번호"
-          onChange={handleChangePassword}
-        />
-      </div>
-      <button
-        type="button"
+      {loginForm.map((input) => (
+        <Box
+          key={input.id}
+        >
+          <TextField
+            id={input.id}
+            name={input.name}
+            label={input.label}
+            onChange={handleChange}
+          />
+        </Box>
+      ))}
+      <Button
+        variant="contained"
         onClick={handleClick}
       >
         로그인
-      </button>
+      </Button>
     </>
   );
 }
