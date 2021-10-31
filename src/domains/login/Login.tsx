@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
 
-const Login = ({
-  onClick,
-}: any) => {
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+
+// const loginForm = [
+//   {
+//     label: '아이디',
+//     name: 'userId',
+//   },
+// ];
+
+function Login({ onClick }: any) {
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
 
@@ -22,8 +30,15 @@ const Login = ({
 
   return (
     <>
-      <div>
-        <label htmlFor="login-userId">
+      <Box>
+        <TextField
+          label="아이디"
+          id="userId"
+          name="userId"
+          value={userId}
+          onChange={() => handleChangeUserId}
+        />
+        {/* <label htmlFor="login-userId">
           아이디
         </label>
         <input
@@ -33,8 +48,8 @@ const Login = ({
           value={userId}
           placeholder="아이디"
           onChange={handleChangeUserId}
-        />
-      </div>
+        /> */}
+      </Box>
       <div>
         <label htmlFor="login-password">
           비밀번호
@@ -56,6 +71,6 @@ const Login = ({
       </button>
     </>
   );
-};
+}
 
 export default Login;
