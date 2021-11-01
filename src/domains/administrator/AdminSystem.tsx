@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import AppBar from '@mui/material/AppBar';
@@ -53,18 +55,18 @@ function ClippedDrawer() {
               </ListItem>
             ))}
           </List>
-
           <Divider />
-
           <List>
-            <ListItem
-              button
-            >
-              <ListItemIcon>
-                <MeetingRoomOutlinedIcon />
-              </ListItemIcon>
-              <ListItemText primary="로그아웃" />
-            </ListItem>
+            <Link to="/logout">
+              <ListItem
+                button
+              >
+                <ListItemIcon>
+                  <MeetingRoomOutlinedIcon />
+                </ListItemIcon>
+                <ListItemText primary="로그아웃" />
+              </ListItem>
+            </Link>
           </List>
         </Box>
       </Drawer>
@@ -105,8 +107,8 @@ function ClippedDrawer() {
 function AdminSystem() {
   return (
     <>
-      <UserPage />
       <ClippedDrawer />
+      <UserPage />
     </>
   );
 }
