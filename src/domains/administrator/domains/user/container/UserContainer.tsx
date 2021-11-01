@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 import Users from '../component/Users';
 
-import { getUsers } from '../../../../services/api';
-import { loadItem } from '../../../../services/storage';
-import { AuthenticationKey } from '../../../../services/serviceKey';
+import { getUsers } from '../../../../../services/api';
+import { loadItem } from '../../../../../services/storage';
+import { AuthenticationKey } from '../../../../../services/serviceKey';
 
 function UserContainer() {
   const [users, setUsers] = useState([]);
