@@ -1,12 +1,11 @@
 import React from 'react';
 
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import BlockOutlinedIcon from '@mui/icons-material/BlockOutlined';
+
+import LabelMenu from './LabelMenu';
 
 const menuList = [
   {
@@ -25,17 +24,11 @@ function MainMenus() {
   return (
     <List>
       {menuList.map(({ key, label, icon }) => (
-        <ListItem
+        <LabelMenu
           key={key}
-          button
-        >
-          <ListItemIcon
-            style={{ minWidth: 40 }}
-          >
-            {icon}
-          </ListItemIcon>
-          <ListItemText primary={label} />
-        </ListItem>
+          label={label}
+          icon={icon}
+        />
       ))}
     </List>
   );
