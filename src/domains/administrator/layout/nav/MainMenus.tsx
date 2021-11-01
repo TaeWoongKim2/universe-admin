@@ -6,19 +6,35 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import MailIcon from '@mui/icons-material/Mail';
+import BlockOutlinedIcon from '@mui/icons-material/BlockOutlined';
+
+const menuList = [
+  {
+    key: 'user',
+    label: '사용자',
+    icon: <AccountCircleOutlinedIcon />,
+  },
+  {
+    key: 'dummy',
+    label: '더미메뉴',
+    icon: <BlockOutlinedIcon />,
+  },
+];
 
 function MainMenus() {
   return (
     <List>
-      {['사용자', '임시메뉴'].map((text, index) => (
-        <ListItem button key={text}>
-          <ListItemIcon>
-            {index % 2 === 0
-              ? <AccountCircleOutlinedIcon />
-              : <MailIcon />}
+      {menuList.map(({ key, label, icon }) => (
+        <ListItem
+          key={key}
+          button
+        >
+          <ListItemIcon
+            style={{ minWidth: 40 }}
+          >
+            {icon}
           </ListItemIcon>
-          <ListItemText primary={text} />
+          <ListItemText primary={label} />
         </ListItem>
       ))}
     </List>

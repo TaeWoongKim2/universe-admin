@@ -12,11 +12,19 @@ import MeetingRoomOutlinedIcon from '@mui/icons-material/MeetingRoomOutlined';
 function SubMenus() {
   return (
     <List>
-      <Link to="/logout">
+      <Link
+        to="/logout"
+        style={{
+          color: '#333',
+          textDecoration: 'none',
+        }}
+      >
         <ListItem
           button
         >
-          <ListItemIcon>
+          <ListItemIcon
+            style={{ minWidth: 40 }}
+          >
             <MeetingRoomOutlinedIcon />
           </ListItemIcon>
           <ListItemText primary="로그아웃" />
