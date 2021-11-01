@@ -25,8 +25,6 @@ function UserContainer() {
       setIsError(false);
       try {
         const userData = await fetchUsers();
-        console.log(userData);
-
         setUsers(userData);
       } catch (error) {
         setIsError(true);
