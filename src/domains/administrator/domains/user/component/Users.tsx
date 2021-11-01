@@ -25,15 +25,12 @@ function Users({
 }: UsersType) {
   return (
     <>
-      {users.map((user: UserType) => {
-        console.log(user);
-        return (
-          <User
-            key={user.nickname}
-            user={user}
-          />
-        );
-      })}
+      {users.map((user: UserType) => (
+        <User
+          key={user.nickname}
+          user={user}
+        />
+      ))}
     </>
   );
 }
