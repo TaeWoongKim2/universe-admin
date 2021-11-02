@@ -5,11 +5,7 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
 
-import Login from './Login';
-
-import { postLogin } from '../../services/api';
-import { saveItem } from '../../services/storage';
-import { AuthenticationKey } from '../../services/serviceKey';
+import LoginContainer from './LoginContainer';
 
 const styles = {
   loginBox: {
@@ -29,20 +25,9 @@ const styles = {
   },
 } as const;
 
-type AdminUser = {
-  userId: string;
-  password: string;
-}
-
-function LoginContainer({
-  setAuthentication,
-}: any) {
-  const login = async (adminUser: AdminUser) => {
-    const authentication = await postLogin(adminUser);
-    if (authentication) {
-      saveItem(AuthenticationKey, JSON.stringify(authentication));
-      setAuthentication(authentication);
-    }
+export default ({ setAuth }: any) => {
+  const handleAuth = (auth: any) => {
+    setAuth(auth);
   };
 
   return (
@@ -68,7 +53,7 @@ function LoginContainer({
           />
           Sign in
         </Typography>
-        <Login onClick={login} />
+        <LoginContainer onLogin={handleAuth} />
         <Typography
           variant="overline"
           display="block"
@@ -83,6 +68,4 @@ function LoginContainer({
       </Paper>
     </Box>
   );
-}
-
-export default LoginContainer;
+};
