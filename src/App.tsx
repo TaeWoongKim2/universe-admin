@@ -1,6 +1,6 @@
 import React from 'react';
 
-import AdminApp from './domains/AdminApp';
+import Routers from './router';
 
 import GlobalStyles from './GlobalStyles';
 
@@ -8,7 +8,7 @@ function App() {
   return (
     <>
       <GlobalStyles />
-      <AdminApp />
+      <Routers />
     </>
   );
 }
