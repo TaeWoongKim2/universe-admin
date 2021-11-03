@@ -15,6 +15,7 @@ export default () => (
     variant="permanent"
     sx={{
       width: drawerWidth,
+      flexBasis: drawerWidth,
       flexShrink: 0,
       '& .MuiDrawer-paper': {
         width: drawerWidth,

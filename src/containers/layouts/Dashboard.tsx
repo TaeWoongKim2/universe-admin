@@ -15,8 +15,8 @@ export default ({ children }: any) => (
     <Box
       component="main"
       sx={{
-        p: 3,
         flexGrow: 1,
+        p: 3,
       }}
     >
       <Toolbar />
