@@ -1,7 +1,12 @@
 import React, { useEffect } from 'react';
 
 import { DataGrid, GridColDef } from '@mui/x-data-grid'; // , GridValueGetterParams
+
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+
+import RefreshIcon from '@mui/icons-material/Refresh';
 
 const columns: GridColDef[] = [
   {
@@ -9,66 +14,82 @@ const columns: GridColDef[] = [
     headerName: 'ID',
     type: 'number',
     sortable: false,
-    width: 60,
+    disableColumnMenu: true,
+    flex: 1,
+    minWidth: 60,
   },
   {
     field: 'nickname',
     headerName: '사용자명',
     sortable: false,
-    width: 120,
+    flex: 2,
+    minWidth: 120,
   },
   {
     field: 'age',
     headerName: '나이',
-    type: 'number',
+    headerAlign: 'center',
+    align: 'center',
     sortable: false,
-    width: 60,
+    disableColumnMenu: true,
+    flex: 2,
+    minWidth: 90,
   },
   {
     field: 'mbti',
     headerName: 'MBTI',
+    headerAlign: 'center',
+    align: 'center',
     sortable: false,
-    width: 80,
+    disableColumnMenu: true,
+    flex: 1,
+    minWidth: 60,
   },
   {
     field: 'universeName',
     headerName: '대학교',
     sortable: false,
-    width: 140,
+    disableColumnMenu: true,
+    flex: 4,
+    minWidth: 240,
   },
   {
     field: 'major',
     headerName: '전공',
     sortable: false,
-    width: 100,
+    disableColumnMenu: true,
+    flex: 2,
+    minWidth: 120,
   },
-  {
-    field: 'major',
-    headerName: '전공',
-    sortable: false,
-    width: 100,
-  },
-  // universeCertiImg: string;
-  // verified: boolean;
-  // deleteYn: string;
   {
     field: 'universeCertiImg',
     headerName: '학생증',
+    headerAlign: 'center',
+    align: 'center',
     sortable: false,
-    width: 100,
+    disableColumnMenu: true,
+    flex: 1,
+    minWidth: 60,
   },
   {
     field: 'verified',
-    headerName: '서비스승인',
+    headerName: '승인',
+    headerAlign: 'center',
+    align: 'center',
     sortable: false,
-    width: 100,
+    disableColumnMenu: true,
+    flex: 1,
+    minWidth: 60,
   },
-
   {
     field: 'deleteYn',
-    headerName: '서비스해지',
+    headerName: '탈퇴',
+    headerAlign: 'center',
+    align: 'center',
     sortable: false,
-    width: 100,
+    disableColumnMenu: true,
+    flex: 1,
+    minWidth: 60,
   },
   // {
   //   field: 'fullName',
@@ -102,10 +123,35 @@ export default function UserDataTable({ data, onReload }: any) {
   const rows: readonly { [key: string]: any }[] = [...data];
 
   return (
-    <div style={{ height: 580, width: '100%' }}>
-      <Button variant="contained" onClick={onReload}>
-        검색
-      </Button>
+    <Box style={{ height: 580, width: '100%' }}>
+      <Box
+        style={{
+          display: 'flex',
+          flexFlow: 'row nowrap',
+          justifyContent: 'space-between',
+          marginBottom: '.4em',
+        }}
+      >
+        <Stack direction="row" spacing={1}>
+          <Button variant="outlined" onClick={onReload}>
+            학생증 검사
+          </Button>
+          <Button variant="contained" onClick={onReload}>
+            학생증 승인
+          </Button>
+        </Stack>
+
+        <Stack direction="row-reverse" spacing={1}>
+          <Button
+            variant="outlined"
+            startIcon={<RefreshIcon />}
+            sx={{ float: 'right' }}
+          >
+            새로고침
+          </Button>
+        </Stack>
+      </Box>
+
       <DataGrid
         rows={rows}
         columns={columns}
@@ -113,6 +159,6 @@ export default function UserDataTable({ data, onReload }: any) {
         rowsPerPageOptions={[10]}
         checkboxSelection
       />
-    </div>
+    </Box>
   );
 }
