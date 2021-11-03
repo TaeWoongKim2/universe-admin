@@ -16,7 +16,7 @@ module.exports = {
   },
   extends: [
     'plugin:react/recommended',
-    'airbnb-typescript',
+    'airbnb',
     'prettier',
   ],
   parser: '@typescript-eslint/parser',
@@ -29,8 +29,8 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: [
-    'react',
     'import',
+    'react',
     '@typescript-eslint',
   ],
   rules: {

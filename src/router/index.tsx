@@ -1,21 +1,25 @@
 import React, { useState } from 'react';
+
 import {
-  BrowserRouter as Router, Route, Switch, Redirect,
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
 } from 'react-router-dom';
 
 // Layouts
 import Dashboard from '@layouts/Dashboard';
 
 // Login view
-import Login from '../containers/views/Login';
-import Logout from '../containers/views/Logout';
+import Login from '@views//Login';
+import Logout from '@views/Logout';
 
 // Admin views
-import Admin from '../containers/views/Admin';
-import User from '../containers/views/Admin/User';
+import Admin from '@views/Admin';
+import User from '@views/Admin/User';
 
-import { loadItem } from '../services/storage';
-import { AuthenticationKey } from '../services/serviceKey';
+import { loadItem } from '@services/storage';
+import { AuthenticationKey } from '@services/serviceKey';
 
 export default () => {
   const [auth, setAuth] = useState(loadItem(AuthenticationKey));
