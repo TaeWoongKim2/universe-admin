@@ -12,11 +12,7 @@ export default () => (
     }}
   >
     <Toolbar>
-      <Typography
-        variant="h6"
-        component="div"
-        noWrap
-      >
+      <Typography variant="h6" component="div" noWrap>
         캠밋 관리자 시스템
       </Typography>
     </Toolbar>

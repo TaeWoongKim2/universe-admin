@@ -1,15 +1,15 @@
 import React from 'react';
 
-import Login from './Login';
+import { postLogin } from '@services/api';
+import { saveItem } from '@services/storage';
+import { AuthenticationKey } from '@services/serviceKey';
 
-import { postLogin } from '../../../services/api';
-import { saveItem } from '../../../services/storage';
-import { AuthenticationKey } from '../../../services/serviceKey';
+import Login from './Login';
 
 type AdminUser = {
   userId: string;
   password: string;
-}
+};
 
 function LoginContainer({ onLogin }: any) {
   const login = async (adminUser: AdminUser) => {
@@ -20,9 +20,7 @@ function LoginContainer({ onLogin }: any) {
     }
   };
 
-  return (
-    <Login onClick={login} />
-  );
+  return <Login onClick={login} />;
 }
 
 export default LoginContainer;

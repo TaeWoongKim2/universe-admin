@@ -22,26 +22,18 @@ const menuList = [
 
 type Auth = {
   authenticated: boolean;
-}
+};
 
-export default ({
-  authenticated,
-}: Auth) => (
+export default ({ authenticated }: Auth) => (
   <header>
     <h1>
-      {menuList.map((menu) => (
-        (authenticated === menu.showByAuth)
-          ? (
-            <Link
-              key={menu.href}
-              to={menu.href}
-            >
-              {menu.label}
-              {' '}
-            </Link>
-          )
-          : null
-      ))}
+      {menuList.map((menu) =>
+        authenticated === menu.showByAuth ? (
+          <Link key={menu.href} to={menu.href}>
+            {menu.label}{' '}
+          </Link>
+        ) : null,
+      )}
     </h1>
   </header>
 );

@@ -6,19 +6,19 @@ function GlobalStyles() {
   return (
     <Global
       styles={css`
-      ${reset};
-      * {
+        ${reset};
+        * {
           box-sizing: boerder-box;
-      }
-      
-      body {
+        }
+
+        body {
           font-family: sans-serif, -apple-system;
           font-size: 14px;
           height: 100vh;
           margin: 0;
-          background-color: #F9F9F9;
-      }
-        `}
+          background-color: #f9f9f9;
+        }
+      `}
     />
   );
 }

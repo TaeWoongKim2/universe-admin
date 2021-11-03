@@ -25,15 +25,8 @@ const menuList = [
 function MainMenus() {
   return (
     <List>
-      {menuList.map(({
-        key, to, label, icon,
-      }) => (
-        <LinkedMenu
-          key={key}
-          href={to}
-          label={label}
-          icon={icon}
-        />
+      {menuList.map(({ key, to, label, icon }) => (
+        <LinkedMenu key={key} href={to} label={label} icon={icon} />
       ))}
     </List>
   );

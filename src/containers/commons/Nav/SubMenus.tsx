@@ -18,18 +18,8 @@ const subMenuList = [
 function SubMenus() {
   return (
     <List>
-      {subMenuList.map(({
-        key,
-        to,
-        label,
-        icon,
-      }) => (
-        <LinkedMenu
-          key={key}
-          href={to}
-          label={label}
-          icon={icon}
-        />
+      {subMenuList.map(({ key, to, label, icon }) => (
+        <LinkedMenu key={key} href={to} label={label} icon={icon} />
       ))}
     </List>
   );

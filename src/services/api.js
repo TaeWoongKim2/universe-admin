@@ -13,11 +13,7 @@ const APPLICATION_JSON_UTF8 = () => 'application/json;charset=UTF-8';
  * @param fcmToken
  * @returns 인증 토큰
  */
-export async function postLogin({
-  userId,
-  password,
-  fcmToken = '',
-}) {
+export async function postLogin({ userId, password, fcmToken = '' }) {
   const url = `${SERVICE_DOMAIN()}/api/user/signin`;
   const response = await fetch(url, {
     method: 'POST',
@@ -53,10 +49,7 @@ export async function postLogin({
  * @returns 인증 토큰
  * http 3.34.191.212:9090/api/user 'Authorization:Bearer {token}'
  */
-export async function getUsers({
-  type = 'Bearer',
-  token,
-}) {
+export async function getUsers({ type = 'Bearer', token }) {
   const response = await fetch(`${SERVICE_DOMAIN()}/api/user`, {
     method: 'GET',
     headers: {
