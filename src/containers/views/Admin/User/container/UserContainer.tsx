@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import { getUsers } from '@services/api';
 import { loadItem } from '@services/storage';
 import { AuthenticationKey } from '@services/serviceKey';
 
-import Users from '@views/Admin/User/component/Users';
+import UserDataTable from '@views/Admin/User/component/UserDataTable';
 
 function UserContainer() {
   const [users, setUsers] = useState([]);
@@ -20,27 +20,22 @@ function UserContainer() {
     return fetchedUserData;
   }
 
-  useEffect(() => {
-    const getUserData = async () => {
-      setIsError(false);
-      try {
-        const userData = await fetchUsers();
-        setUsers(userData);
-      } catch (error) {
-        setIsError(true);
-      }
-    };
-    getUserData();
-  }, []);
+  const reloadUserData = async () => {
+    try {
+      const userData = await fetchUsers();
+      setUsers(userData);
+    } catch (error) {
+      setIsError(true);
+    }
+  };
 
   return (
     <>
-      관리자가 할 수 있는 모든 메뉴를 보여주거나, 주요 메뉴를 보여줍니다.
       {isError ? (
         <div>Something went wrong!</div>
       ) : (
         <>
-          <Users users={users} />
+          <UserDataTable data={users} onReload={reloadUserData} />
         </>
       )}
     </>
