@@ -7,16 +7,12 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 
 type LinkedMenuItem = {
-  href: string,
-  label: string,
-  icon: React.ReactElement<any>,
-}
+  href: string;
+  label: string;
+  icon: React.ReactElement<any>;
+};
 
-function Menu({
-  href,
-  label,
-  icon,
-}: LinkedMenuItem) {
+function Menu({ href, label, icon }: LinkedMenuItem) {
   return (
     <Link
       to={href}
@@ -25,17 +21,9 @@ function Menu({
         textDecoration: 'none',
       }}
     >
-      <ListItem
-        button
-      >
-        <ListItemIcon
-          style={{ minWidth: 40 }}
-        >
-          {icon}
-        </ListItemIcon>
-        <ListItemText
-          primary={label}
-        />
+      <ListItem button>
+        <ListItemIcon style={{ minWidth: 40 }}>{icon}</ListItemIcon>
+        <ListItemText primary={label} />
       </ListItem>
     </Link>
   );

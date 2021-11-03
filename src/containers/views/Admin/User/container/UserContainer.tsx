@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-import UserDataGrid from '../component/UserDataGrid';
-import Users from '../component/Users';
+import { getUsers } from '@services/api';
+import { loadItem } from '@services/storage';
+import { AuthenticationKey } from '@services/serviceKey';
 
-import { getUsers } from '../../../../../services/api';
-import { loadItem } from '../../../../../services/storage';
-import { AuthenticationKey } from '../../../../../services/serviceKey';
+import Users from '@views/Admin/User/component/Users';
 
 function UserContainer() {
   const [users, setUsers] = useState([]);
@@ -36,16 +35,14 @@ function UserContainer() {
 
   return (
     <>
-      관리자가 할 수 있는 모든 메뉴를 보여주거나,
-      주요 메뉴를 보여줍니다.
-      {isError
-        ? <div>Something went wrong!</div>
-        : (
-          <>
-            <UserDataGrid />
-            <Users users={users} />
-          </>
-        )}
+      관리자가 할 수 있는 모든 메뉴를 보여주거나, 주요 메뉴를 보여줍니다.
+      {isError ? (
+        <div>Something went wrong!</div>
+      ) : (
+        <>
+          <Users users={users} />
+        </>
+      )}
     </>
   );
 }

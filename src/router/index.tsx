@@ -11,7 +11,7 @@ import {
 import Dashboard from '@layouts/Dashboard';
 
 // Login view
-import Login from '@views//Login';
+import Login from '@views/Login';
 import Logout from '@views/Logout';
 
 // Admin views
@@ -29,25 +29,23 @@ export default () => {
     <Router>
       <Switch>
         <Route path="/login" exact>
-          {authenticated
-            ? <Redirect to="/" />
-            : <Login setAuth={setAuth} />}
+          {authenticated ? <Redirect to="/" /> : <Login setAuth={setAuth} />}
         </Route>
 
         <Route path="/:path?" exact>
-          {authenticated
-            ? (
-              <Dashboard>
-                <Switch>
-                  <Route path="/" exact component={Admin} />
-                  <Route path="/user" exact component={User} />
-                  <Route path="/logout" exact>
-                    <Logout setAuth={setAuth} />
-                  </Route>
-                </Switch>
-              </Dashboard>
-            )
-            : <Redirect to="/login" />}
+          {authenticated ? (
+            <Dashboard>
+              <Switch>
+                <Route path="/" exact component={Admin} />
+                <Route path="/user" exact component={User} />
+                <Route path="/logout" exact>
+                  <Logout setAuth={setAuth} />
+                </Route>
+              </Switch>
+            </Dashboard>
+          ) : (
+            <Redirect to="/login" />
+          )}
         </Route>
       </Switch>
     </Router>

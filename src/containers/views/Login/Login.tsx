@@ -24,7 +24,9 @@ function Login({ onClick }: any) {
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { target: { name, value } } = event;
+    const {
+      target: { name, value },
+    } = event;
     setForm({
       ...form,
       [name]: value,
@@ -55,11 +57,7 @@ function Login({ onClick }: any) {
           />
         </Box>
       ))}
-      <Button
-        variant="contained"
-        onClick={handleClick}
-        fullWidth
-      >
+      <Button variant="contained" onClick={handleClick} fullWidth>
         로그인
       </Button>
     </>

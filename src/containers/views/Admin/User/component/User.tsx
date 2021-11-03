@@ -1,8 +1,8 @@
 import React from 'react';
 
 type UserType = {
-  user: UserInterface,
-}
+  user: UserInterface;
+};
 
 interface UserInterface {
   id: number;
@@ -19,11 +19,7 @@ interface UserInterface {
 }
 
 function User({ user }: UserType) {
-  return (
-    <p>
-      {`나는 ${user.nickname} 이라는 사용자 입니다.`}
-    </p>
-  );
+  return <p>{`나는 ${user.nickname} 이라는 사용자 입니다.`}</p>;
 }
 
 export default User;

@@ -23,9 +23,7 @@ export default () => (
     }}
   >
     <Toolbar />
-    <Box
-      sx={{ overflow: 'auto' }}
-    >
+    <Box sx={{ overflow: 'auto' }}>
       <MainMenus />
       <Divider />
       <SubMenus />

@@ -3,8 +3,8 @@ import React from 'react';
 import User from './User';
 
 type UsersType = {
-  users: Array<UserType>,
-}
+  users: Array<UserType>;
+};
 
 interface UserType {
   id: number;
@@ -20,16 +20,11 @@ interface UserType {
   deleteYn: string;
 }
 
-function Users({
-  users,
-}: UsersType) {
+function Users({ users }: UsersType) {
   return (
     <>
       {users.map((user: UserType) => (
-        <User
-          key={user.nickname}
-          user={user}
-        />
+        <User key={user.nickname} user={user} />
       ))}
     </>
   );
