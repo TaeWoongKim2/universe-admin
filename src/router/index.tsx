@@ -4,7 +4,7 @@ import {
 } from 'react-router-dom';
 
 // Layouts
-import Dashboard from '../containers/layouts/Dashboard';
+import Dashboard from '@layouts/Dashboard';
 
 // Login view
 import Login from '../containers/views/Login';
