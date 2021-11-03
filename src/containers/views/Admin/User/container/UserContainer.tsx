@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+import UserDataGrid from '../component/UserDataGrid';
 import Users from '../component/Users';
 
 import { getUsers } from '../../../../../services/api';
@@ -39,7 +40,12 @@ function UserContainer() {
       주요 메뉴를 보여줍니다.
       {isError
         ? <div>Something went wrong!</div>
-        : <Users users={users} />}
+        : (
+          <>
+            <UserDataGrid />
+            <Users users={users} />
+          </>
+        )}
     </>
   );
 }
