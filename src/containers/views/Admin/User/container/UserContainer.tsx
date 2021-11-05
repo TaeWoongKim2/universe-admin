@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { getUsers } from '@services/api';
+import { getUsers, validUser } from '@services/api';
 import { loadItem } from '@services/storage';
 import { AuthenticationKey } from '@services/serviceKey';
 
@@ -29,13 +29,42 @@ function UserContainer() {
     }
   };
 
+  const verifyUser = async (id: Number) => {
+    try {
+      const isOk = await validUser({
+        token: loginUser?.token,
+        id,
+      });
+      if (!isOk) {
+        throw new Error('Error in communication, failed valid user!');
+      }
+
+      const updatedUsers: any = users.map((user: any) => {
+        if (user.id !== id) {
+          return user;
+        }
+        return {
+          ...user,
+          verified: true,
+        };
+      });
+      setUsers(updatedUsers);
+    } catch (error) {
+      alert('해당 사용자 승인이 정상적으로 이뤄지지 않았습니다!');
+    }
+  };
+
   return (
     <>
       {isError ? (
         <div>Something went wrong!</div>
       ) : (
         <>
-          <UserDataTable data={users} onReload={reloadUserData} />
+          <UserDataTable
+            data={users}
+            onReload={reloadUserData}
+            onVerify={verifyUser}
+          />
         </>
       )}
     </>

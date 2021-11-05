@@ -44,9 +44,8 @@ export async function postLogin({ userId, password, fcmToken = '' }) {
 
 /**
  * 모든 서비스 사용자 목록을 불러옵니다.
- * @param password
  * @param fcmToken
- * @returns 인증 토큰
+ * @returns 서비스 사용자 목록
  * http 3.34.191.212:9090/api/user 'Authorization:Bearer {token}'
  */
 export async function getUsers({ type = 'Bearer', token }) {
@@ -61,4 +60,31 @@ export async function getUsers({ type = 'Bearer', token }) {
 
   const body = await response.json();
   return body;
+}
+
+/**
+ * 한 명에 사용자에 대해 서비스 사용을 승인합니다.
+ * @param type 인증방식
+ * @param fcmToken 인증토큰
+ * @param id 서비스 사용 승인할 사용자 아이디
+ * http 3.34.191.212:9090/api/user 'Authorization:Bearer {token}'
+ */
+export async function validUser({ type = 'Bearer', token, id }) {
+  const response = await fetch(`${SERVICE_DOMAIN()}/api/user/valid`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': APPLICATION_JSON_UTF8(),
+      accept: APPLICATION_JSON_UTF8(),
+      Authorization: `${type} ${token}`,
+    },
+    body: JSON.stringify({
+      id,
+    }),
+  });
+
+  if (!response.ok) {
+    alert('아이디 및 패스워드를 확인해주세요!');
+    return null;
+  }
+  return response.ok;
 }

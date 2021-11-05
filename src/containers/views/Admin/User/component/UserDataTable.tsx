@@ -1,12 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { DataGrid, GridColDef } from '@mui/x-data-grid'; // , GridValueGetterParams
+import { makeStyles } from '@mui/styles';
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
 import RefreshIcon from '@mui/icons-material/Refresh';
+
+import moment from 'moment';
+
+const useStyles = makeStyles(() => ({
+  root: {
+    '& .MuiDataGrid-columnHeaderCheckbox .MuiDataGrid-columnHeaderTitleContainer':
+      {
+        display: 'none',
+      },
+  },
+}));
 
 const columns: GridColDef[] = [
   {
@@ -32,8 +44,8 @@ const columns: GridColDef[] = [
     align: 'center',
     sortable: false,
     disableColumnMenu: true,
-    flex: 2,
-    minWidth: 90,
+    flex: 1,
+    minWidth: 60,
   },
   {
     field: 'mbti',
@@ -43,7 +55,7 @@ const columns: GridColDef[] = [
     sortable: false,
     disableColumnMenu: true,
     flex: 1,
-    minWidth: 60,
+    minWidth: 90,
   },
   {
     field: 'universeName',
@@ -74,6 +86,7 @@ const columns: GridColDef[] = [
   {
     field: 'verified',
     headerName: '승인',
+    type: 'boolean',
     headerAlign: 'center',
     align: 'center',
     sortable: false,
@@ -115,12 +128,51 @@ const columns: GridColDef[] = [
   },
 ];
 
-export default function UserDataTable({ data, onReload }: any) {
+const getAge = (birthDate: string) => {
+  if (!birthDate) {
+    return '-';
+  }
+  const yearFormat = birthDate.length === 6 ? 'YY' : 'YYYY';
+  const birth = moment(birthDate).format(yearFormat);
+  return moment().diff(birth, 'years') + 1;
+};
+
+export default function UserDataTable({ data, onReload, onVerify }: any) {
+  const [select, setSelection] = useState<Array<number>>([]);
+
+  const handleRowSelection = (selectItems: any[]) => {
+    console.log(selectItems);
+
+    if (selectItems.length > 1) {
+      const lastSelectedItem = selectItems.pop();
+      setSelection([lastSelectedItem]);
+      return;
+    }
+
+    const copiedItems: number[] = [...selectItems];
+    copiedItems.sort((a: number, b: number) => a - b);
+    setSelection(copiedItems);
+  };
+
+  const handlVerifiedUser = () => {
+    if (select.length > 1) {
+      alert('현재, 한 명의 사용자씩 승인이 가능합니다!');
+      return;
+    }
+    const selectedOne = select[0];
+    onVerify(selectedOne);
+  };
+
   useEffect(() => {
     onReload();
   }, []);
 
-  const rows: readonly { [key: string]: any }[] = [...data];
+  const classes = useStyles();
+  const rebuildData = data.map((user: any) => ({
+    ...user,
+    age: getAge(user.age),
+  }));
+  const rows: readonly { [key: string]: any }[] = [...rebuildData];
 
   return (
     <Box style={{ height: 580, width: '100%' }}>
@@ -136,7 +188,7 @@ export default function UserDataTable({ data, onReload }: any) {
           <Button variant="outlined" onClick={onReload}>
             학생증 검사
           </Button>
-          <Button variant="contained" onClick={onReload}>
+          <Button variant="contained" onClick={handlVerifiedUser}>
             학생증 승인
           </Button>
         </Stack>
@@ -153,11 +205,15 @@ export default function UserDataTable({ data, onReload }: any) {
       </Box>
 
       <DataGrid
+        className={classes.root}
         rows={rows}
         columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[10]}
+        pageSize={10}
+        rowsPerPageOptions={[10, 25, 50, 100]}
+        selectionModel={select}
         checkboxSelection
+        disableSelectionOnClick
+        onSelectionModelChange={handleRowSelection}
       />
     </Box>
   );
