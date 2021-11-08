@@ -137,7 +137,12 @@ const getAge = (birthDate: string) => {
   return moment().diff(birth, 'years') + 1;
 };
 
-export default function UserDataTable({ data, onReload, onVerify }: any) {
+export default function UserDataTable({
+  data,
+  onReload,
+  onIdentify,
+  onVerify,
+}: any) {
   const [select, setSelection] = useState<Array<number>>([]);
 
   const handleRowSelection = (selectItems: any[]) => {
@@ -154,9 +159,21 @@ export default function UserDataTable({ data, onReload, onVerify }: any) {
     setSelection(copiedItems);
   };
 
-  const handlVerifiedUser = () => {
+  const handlClickStudentIdCard = () => {
     if (select.length > 1) {
-      alert('현재, 한 명의 사용자씩 승인이 가능합니다!');
+      alert('현재, 한 명의 학생 별로 확인이 가능합니다!');
+      return;
+    }
+    const selectedOne = select[0];
+    const selectedStudent = data.find(
+      (student: any) => student.id === selectedOne,
+    );
+    onIdentify(selectedStudent);
+  };
+
+  const handlClickStudentVerification = () => {
+    if (select.length > 1) {
+      alert('현재, 한 명의 학생 별로 승인이 가능합니다!');
       return;
     }
     const selectedOne = select[0];
@@ -185,10 +202,10 @@ export default function UserDataTable({ data, onReload, onVerify }: any) {
         }}
       >
         <Stack direction="row" spacing={1}>
-          <Button variant="outlined" onClick={onReload}>
+          <Button variant="outlined" onClick={handlClickStudentIdCard}>
             학생증 검사
           </Button>
-          <Button variant="contained" onClick={handlVerifiedUser}>
+          <Button variant="contained" onClick={handlClickStudentVerification}>
             학생증 승인
           </Button>
         </Stack>
@@ -198,6 +215,7 @@ export default function UserDataTable({ data, onReload, onVerify }: any) {
             variant="outlined"
             startIcon={<RefreshIcon />}
             sx={{ float: 'right' }}
+            onClick={onReload}
           >
             새로고침
           </Button>
